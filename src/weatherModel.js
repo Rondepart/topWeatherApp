@@ -5,7 +5,7 @@ const API_KEY = "GVULB6J76E8MNFQPU2Z56EW6U";
 export async function getWeatherData(location, period = "") {
   const periodPart =
     period === "" ? "today" : `last${encodeURIComponent(period)}days`;
-  const includePart = periodPart === "today" ? "" : "&include=days";
+  const includePart = periodPart === "today" ? "&include=hours,current" : "&include=days";
 
   try {
     const response = await fetch(
@@ -21,14 +21,19 @@ export async function getWeatherData(location, period = "") {
     console.error(error);
   }
 }
-export function getCurrentWeather(data) {
+export function getWeatherToday(data) {
   if (!data || !data.currentConditions) return;
   const location = data.address;
   const currentWeather = data.currentConditions;
+  const weatherData = data.days[0].hours;
 
   console.log(
     `${location} ${currentWeather.datetime} Current Condition: ${currentWeather.temp} ${currentWeather.conditions} ${currentWeather.icon}`,
   );
+
+  weatherData.forEach((hour) => {
+    console.log(`${hour.datetime} ${hour.temp} ${hour.conditions} ${hour.icon}`);
+  })
 }
 
 export function getWeatherHistory(data) {
