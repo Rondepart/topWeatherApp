@@ -1,6 +1,19 @@
 /* System Fonts with system-ui */
 body {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Adwaita Sans", Cantarell, Ubuntu, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Adwaita Sans",
+    Cantarell,
+    Ubuntu,
+    Helvetica,
+    Arial,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol";
   font-size: var(--fs-sm);
   font-weight: var(--fw-medium);
 }
@@ -21,26 +34,59 @@ body {
   --fw-regular: 400;
   --fw-medium: 500;
   --fw-semibold: 600;
-  --fw-bold: 700; 
+  --fw-bold: 700;
   --fw-extra-bold: 800;
 }
 
 /* reuseable font  size class */
-.text-sm { font-size: var(--var(--fs-sm));}
-.text-base { font-size: var(--fs-base);}
-.text-md { font-size: var(--fs-md);}
-.text-lg { font-size: var(--fs-lg);}
-.text-xl { font-size: var(--fs-xl);}
-.text-xxl { font-size: var(--fs-xxl);}
-.text-xxxl { font-size: var(--fs-xxxl);}
+.text-sm {
+  font-size: var(--var(--fs-sm));
+}
+.text-base {
+  font-size: var(--fs-base);
+}
+.text-md {
+  font-size: var(--fs-md);
+}
+.text-lg {
+  font-size: var(--fs-lg);
+}
+.text-xl {
+  font-size: var(--fs-xl);
+}
+.text-xxl {
+  font-size: var(--fs-xxl);
+}
+.text-xxxl {
+  font-size: var(--fs-xxxl);
+}
 
 /* reuseable font weight class */
-.fw-regular { font-weight: var(--fw-regular);}
-.fw-medium { font-weight: var(--fw-medium);}
-.fw-semibold { font-weight: var(--fw-semibold);}
-.fw-bold { font-weight: var(--fw-bold);}
-.fw-extra-bold { font-weight: var(--fw-extra-bold);}
+.fw-regular {
+  font-weight: var(--fw-regular);
+}
+.fw-medium {
+  font-weight: var(--fw-medium);
+}
+.fw-semibold {
+  font-weight: var(--fw-semibold);
+}
+.fw-bold {
+  font-weight: var(--fw-bold);
+}
+.fw-extra-bold {
+  font-weight: var(--fw-extra-bold);
+}
 
-h1 { font-size: var(--fs-lg); font-weight: var(--fw-semibold); }
-h2 { font-size: var(--fs-md); font-weight: var(--fw-medium); }
-h3 { font-size: var(--fs-base); font-weight: var(--fw-medium); }
+h1 {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+}
+h2 {
+  font-size: var(--fs-md);
+  font-weight: var(--fw-medium);
+}
+h3 {
+  font-size: var(--fs-base);
+  font-weight: var(--fw-medium);
+}
