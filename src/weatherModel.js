@@ -17,3 +17,21 @@ export async function getWeatherData(location, period = "") {
         console.error(error);
     }
 }
+export function getCurrentWeather(data) {
+    if (!data || !data.currentConditions) return;
+    const location = data.address;
+    const currentWeather = data.currentConditions;
+
+    console.log(`${location} ${currentWeather.datetime} Current Condition: ${currentWeather.temp} ${currentWeather.conditions} ${currentWeather.icon}`);
+}
+
+export function getWeatherHistory(data) {
+    if (!data) return;
+    const location = data.address;
+    console.log(location);
+
+    const weatherData = data.days;
+    weatherData.forEach(day => {
+        console.log(`${day.datetime}: ${day.temp} ${day.conditions} ${day.icon}`)
+    });
+}
