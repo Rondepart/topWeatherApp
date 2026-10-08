@@ -4,27 +4,26 @@ const API_KEY = "GVULB6J76E8MNFQPU2Z56EW6U";
 
 export async function getWeatherData(location, period = "") {
   const cleanLocation = normalizeStr(location);
-  if(cleanLocation === "") {
+  if (cleanLocation === "") {
     console.log("Location is required");
     return;
   }
   const periodPart =
     period === "" ? "today" : `last${encodeURIComponent(period)}days`;
-  const includePart = periodPart === "today" ? "&include=hours,current" : "&include=days";
+  const includePart =
+    periodPart === "today" ? "&include=hours,current" : "&include=days";
 
-  try {
-    const response = await fetch(
-      `${BASE_URL}${encodeURIComponent(cleanLocation)}/${periodPart}?unitGroup=metric${includePart}&elements=temp,conditions,icon,datetime&key=${encodeURIComponent(API_KEY)}&contentType=json`,
-    );
-    if (!response.ok) {
-      throw Error("Error: " + response.status);
-    }
-    const data = await response.json();
-    console.log(data);
-    return data;
-  } catch (error) {
-    console.error(error);
+  const response = await fetch(
+    `${BASE_URL}${encodeURIComponent(cleanLocation)}/${periodPart}?unitGroup=metric${includePart}&elements=temp,conditions,icon,datetime&key=${encodeURIComponent(API_KEY)}&contentType=json`,
+  );
+  if (!response.ok) {
+    const error = new Error("Error: " + response.status);
+    error.status = response.status;
+    throw error;
   }
+
+  console.log(response);
+  return response.json();
 }
 export function getWeatherToday(data) {
   if (!data || !data.currentConditions) return;
@@ -37,8 +36,10 @@ export function getWeatherToday(data) {
   );
 
   weatherData.forEach((hour) => {
-    console.log(`${hour.datetime} ${hour.temp} ${hour.conditions} ${hour.icon}`);
-  })
+    console.log(
+      `${hour.datetime} ${hour.temp} ${hour.conditions} ${hour.icon}`,
+    );
+  });
 }
 
 export function getWeatherHistory(data) {
@@ -53,6 +54,6 @@ export function getWeatherHistory(data) {
 }
 
 function normalizeStr(str) {
-  if(typeof str !== "string") return "";
+  if (typeof str !== "string") return "";
   return str.trim();
 }
