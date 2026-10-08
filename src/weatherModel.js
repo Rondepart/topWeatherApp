@@ -3,13 +3,18 @@ const BASE_URL =
 const API_KEY = "GVULB6J76E8MNFQPU2Z56EW6U";
 
 export async function getWeatherData(location, period = "") {
+  const cleanLocation = normalizeStr(location);
+  if(cleanLocation === "") {
+    console.log("Location is required");
+    return;
+  }
   const periodPart =
     period === "" ? "today" : `last${encodeURIComponent(period)}days`;
   const includePart = periodPart === "today" ? "&include=hours,current" : "&include=days";
 
   try {
     const response = await fetch(
-      `${BASE_URL}${encodeURIComponent(location)}/${periodPart}?unitGroup=metric${includePart}&elements=temp,conditions,icon,datetime&key=${encodeURIComponent(API_KEY)}&contentType=json`,
+      `${BASE_URL}${encodeURIComponent(cleanLocation)}/${periodPart}?unitGroup=metric${includePart}&elements=temp,conditions,icon,datetime&key=${encodeURIComponent(API_KEY)}&contentType=json`,
     );
     if (!response.ok) {
       throw Error("Error: " + response.status);
@@ -45,4 +50,9 @@ export function getWeatherHistory(data) {
   weatherData.forEach((day) => {
     console.log(`${day.datetime}: ${day.temp} ${day.conditions} ${day.icon}`);
   });
+}
+
+function normalizeStr(str) {
+  if(typeof str !== "string") return "";
+  return str.trim();
 }
