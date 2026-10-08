@@ -1,4 +1,2 @@
 import * as weatherModel from "./weatherModel.js";
-
-const data = await weatherModel.getWeatherData("Europe");
-weatherModel.getWeatherToday(data);
+import * as weatherController from "./weatherController.js";
