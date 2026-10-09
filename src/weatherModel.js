@@ -27,12 +27,12 @@ export async function getWeatherData(location, period = "") {
 }
 export function getWeatherToday(data) {
   if (!data || !data.currentConditions) return;
-  const location = data.address;
+  const location = data.resolvedAddress;
   const currentWeather = data.currentConditions;
   const weatherData = data.days[0].hours;
 
   console.log(
-    `${location} ${currentWeather.datetime} Current Temp: ${currentWeather.temp} Feels like: ${currentWeather.feelslike} Condition: ${currentWeather.conditions} Icon: ${currentWeather.icon}`,
+    `Resolved Address: ${location} ${currentWeather.datetime} Current Temp: ${currentWeather.temp} Feels like: ${currentWeather.feelslike} Condition: ${currentWeather.conditions} Icon: ${currentWeather.icon}`,
   );
 
   weatherData.forEach((hour) => {
@@ -44,8 +44,8 @@ export function getWeatherToday(data) {
 
 export function getWeatherHistory(data) {
   if (!data) return;
-  const location = data.address;
-  console.log(location);
+  const location = data.resolvedAddress;
+  console.log(`Resovled address: ${location}`);
 
   const weatherData = data.days;
   weatherData.forEach((day) => {
