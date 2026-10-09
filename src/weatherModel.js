@@ -14,7 +14,7 @@ export async function getWeatherData(location, period = "") {
     periodPart === "today" ? "&include=hours,current" : "&include=days";
 
   const response = await fetch(
-    `${BASE_URL}${encodeURIComponent(cleanLocation)}/${periodPart}?unitGroup=metric${includePart}&elements=temp,conditions,icon,datetime&key=${encodeURIComponent(API_KEY)}&contentType=json`,
+    `${BASE_URL}${encodeURIComponent(cleanLocation)}/${periodPart}?unitGroup=metric${includePart}&elements=temp,conditions,icon,datetime,feelslike&key=${encodeURIComponent(API_KEY)}&contentType=json`,
   );
   if (!response.ok) {
     const error = new Error("Error: " + response.status);
@@ -32,12 +32,12 @@ export function getWeatherToday(data) {
   const weatherData = data.days[0].hours;
 
   console.log(
-    `${location} ${currentWeather.datetime} Current Condition: ${currentWeather.temp} ${currentWeather.conditions} ${currentWeather.icon}`,
+    `${location} ${currentWeather.datetime} Current Temp: ${currentWeather.temp} Feels like: ${currentWeather.feelslike} Condition: ${currentWeather.conditions} Icon: ${currentWeather.icon}`,
   );
 
   weatherData.forEach((hour) => {
     console.log(
-      `${hour.datetime} ${hour.temp} ${hour.conditions} ${hour.icon}`,
+      `DateTime: ${hour.datetime} temp: ${hour.temp} condition: ${hour.conditions} Icon: ${hour.icon}`,
     );
   });
 }
