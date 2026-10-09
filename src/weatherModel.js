@@ -6,7 +6,7 @@ export async function getWeatherData(location, period = "") {
   const cleanLocation = normalizeStr(location);
   if (cleanLocation === "") {
     console.log("Location is required");
-    return;
+    return null;
   }
   const periodPart =
     period === "" ? "today" : `last${encodeURIComponent(period)}days`;
@@ -22,35 +22,42 @@ export async function getWeatherData(location, period = "") {
     throw error;
   }
 
-  console.log(response);
   return response.json();
 }
 export function getWeatherToday(data) {
-  if (!data || !data.currentConditions) return;
-  const location = data.resolvedAddress;
+  if (!data || !data.currentConditions) return null;
   const currentWeather = data.currentConditions;
-  const weatherData = data.days[0].hours;
 
-  console.log(
-    `Resolved Address: ${location} ${currentWeather.datetime} Current Temp: ${currentWeather.temp} Feels like: ${currentWeather.feelslike} Condition: ${currentWeather.conditions} Icon: ${currentWeather.icon}`,
-  );
-
-  weatherData.forEach((hour) => {
-    console.log(
-      `DateTime: ${hour.datetime} temp: ${hour.temp} condition: ${hour.conditions} Icon: ${hour.icon}`,
-    );
-  });
+  return {
+    location: data.resolvedAddress,
+    currentConditions: {
+      time: currentWeather.datetime,
+      temp: currentWeather.temp,
+      feelsLike: currentWeather.feelslike,
+      conditions: currentWeather.conditions,
+      icon: currentWeather.icon,
+    },
+    hours: data.days[0].hours.map((hour) => ({
+      time: hour.datetime,
+      temp: hour.temp,
+      conditions: hour.conditions,
+      icon: hour.icon,
+    })),
+  };
 }
 
 export function getWeatherHistory(data) {
-  if (!data) return;
-  const location = data.resolvedAddress;
-  console.log(`Resovled address: ${location}`);
+  if (!data) return null;
 
-  const weatherData = data.days;
-  weatherData.forEach((day) => {
-    console.log(`${day.datetime}: ${day.temp} ${day.conditions} ${day.icon}`);
-  });
+  return {
+    location: data.resolvedAddress,
+    days: data.days.map((day) => ({
+      time: day.datetime,
+      temp: day.temp,
+      conditions: day.conditions,
+      icon: day.icon,      
+    })),
+  };
 }
 
 function normalizeStr(str) {
