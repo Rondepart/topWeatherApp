@@ -6,21 +6,29 @@
     <title>Weather App</title>
   </head>
   <body>
-    <form id="weather-form" novalidate>
-      <label for="location">
-        <span>Enter Location:</span>
-        <input
-          type="text"
-          id="location"
-          class="location"
-          minlength="2"
-          maxlength="100"
-          placeholder="City or Country"
-          required
-        />
-      </label>
-      <div class="location-error"></div>
-      <button type="submit">Search</button>
-    </form>
+    <div class="layout">
+      <header>
+        <form id="weather-form" novalidate>
+          <label for="location">
+            <span>Enter Location:</span>
+            <input
+              type="text"
+              id="location"
+              class="location"
+              minlength="2"
+              maxlength="100"
+              placeholder="City or Country"
+              required
+            />
+          </label>
+          <div class="location-error"></div>
+          <button type="submit">Search</button>
+        </form>
+      </header>
+      <main class="weather-container">
+        <section class="weather-today"></section>
+        <section class="weather-history"></section>
+      </main>
+    </div>
   </body>
 </html>
