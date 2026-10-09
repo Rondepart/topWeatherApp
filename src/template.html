@@ -6,7 +6,7 @@
     <title>Weather App</title>
   </head>
   <body>
-    <form id="weather-form">
+    <form id="weather-form" novalidate>
       <label for="location">
         <span>Enter Location:</span>
         <input
@@ -19,6 +19,7 @@
           required
         />
       </label>
+      <div class="location-error"></div>
       <button type="submit">Search</button>
     </form>
   </body>
