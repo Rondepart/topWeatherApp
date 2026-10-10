@@ -26,8 +26,19 @@
         </form>
       </header>
       <main class="weather-container">
-        <section class="weather-today"></section>
-        <section class="weather-history"></section>
+        <section class="weather-today" hidden> 
+          <article class="current-condition-container">
+            <h3 class="resolved-location"></h3>
+            <div class="current-temp"></div>
+            <div class="current-feelslike-temp"></div>
+            <div class="current-condition"></div>
+            <div class="current-weather-icon"></div>
+          </article>
+          <article class="hourly-weather-today">
+            <h3 class="hourly-weather-header">Hourly weather today</h3>
+            <div class="hourly-weather-cards"></div>
+          </article>
+        </section>
       </main>
     </div>
   </body>
