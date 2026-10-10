@@ -17,16 +17,24 @@ weatherForm.addEventListener("submit", async (e) => {
 
   locationError.textContent = "";
 
-  try {
-    const weatherData = await weatherModel.getWeatherData(location);
-    const weatherToday = weatherModel.getWeatherToday(weatherData);
-    console.log(weatherToday);
-    weatherUI.displayWeatherToday(weatherToday);
-  } catch (error) {
-    if (error.status === 400) {
-      locationError.textContent = "Could not find the country, try a city.";
-    } else {
-      locationError.textContent = `Something went wrong please try again later. ${error.message}`;
-    }
-  }
+  await Promise.allSettled([
+    loadToday(location),
+  ]);
 });
+
+async function loadToday(location) {
+  try {
+  const weatherData = await weatherModel.getWeatherData(location);
+  weatherUI.displayWeatherToday(weatherModel.getWeatherToday(weatherData)); 
+  } catch (error) {
+    handleWeatherError(error);
+  }
+}
+
+async function handleWeatherError(error) {
+  if (error.status === 400) {
+    locationError.textContent = "Could not find the country, try a city.";
+  } else {
+    locationError.textContent = `Something went wrong please try again later. ${error.message}`;
+  }
+}
