@@ -5,6 +5,8 @@ const feelsLike = document.querySelector(".current-feelslike-temp");
 const condition = document.querySelector(".current-condition");
 const icon = document.querySelector(".current-weather-icon");
 const hourlyCards = document.querySelector(".hourly-weather-cards");
+const weatherHistory = document.querySelector(".weather-history");
+const weatherHistoryCards = document.querySelector(".weather-history-cards");
 
 export function displayWeatherToday(data) {
   const { currentConditions: current, hours } = data;
@@ -34,4 +36,28 @@ export function displayWeatherToday(data) {
     hourlyCards.appendChild(card);
   });
   weatherToday.hidden = false;
+}
+
+export function displayWeatherHistory(data) {
+  const {days} = data;
+
+  weatherHistoryCards.innerHTML = "";
+  days.forEach((day) => {
+    const card = document.createElement("div");
+    card.classList.add("day-weather-card");
+
+    const datetime = document.createElement("div");
+    const temp = document.createElement("div");
+    const condition = document.createElement("div");
+    const icon = document.createElement("div");
+
+    datetime.textContent = "date: " + day.time; 
+    temp.textContent = "temp: " + day.temp;
+    condition.textContent = "condition: " + day.conditions;
+    icon.textContent = "icon: " + day.icon;
+
+    card.append(datetime, temp, condition, icon);
+    weatherHistoryCards.appendChild(card);
+  });
+  weatherHistory.hidden = false;
 }

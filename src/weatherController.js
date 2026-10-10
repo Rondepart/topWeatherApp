@@ -19,13 +19,23 @@ weatherForm.addEventListener("submit", async (e) => {
 
   await Promise.allSettled([
     loadToday(location),
+    loadHistory(location),
   ]);
 });
 
 async function loadToday(location) {
   try {
-  const weatherData = await weatherModel.getWeatherData(location);
-  weatherUI.displayWeatherToday(weatherModel.getWeatherToday(weatherData)); 
+    const weatherData = await weatherModel.getWeatherData(location);
+    weatherUI.displayWeatherToday(weatherModel.getWeatherToday(weatherData)); 
+  } catch (error) {
+    handleWeatherError(error);
+  }
+}
+
+async function loadHistory(location, days = 7) {
+  try {
+    const weatherData = await weatherModel.getWeatherData(location, days);
+    weatherUI.displayWeatherHistory(weatherModel.getWeatherHistory(weatherData));
   } catch (error) {
     handleWeatherError(error);
   }
