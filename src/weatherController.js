@@ -1,4 +1,5 @@
 import * as weatherModel from "./weatherModel.js";
+import * as weatherUI from "./weatherUI.js";
 
 const weatherForm = document.querySelector("#weather-form");
 const locationInput = document.querySelector(".location");
@@ -18,7 +19,9 @@ weatherForm.addEventListener("submit", async (e) => {
 
   try {
     const weatherData = await weatherModel.getWeatherData(location);
-    weatherModel.getWeatherToday(weatherData);
+    const weatherToday = weatherModel.getWeatherToday(weatherData);
+    console.log(weatherToday);
+    weatherUI.displayWeatherToday(weatherToday);
   } catch (error) {
     if (error.status === 400) {
       locationError.textContent = "Could not find the country, try a city.";
