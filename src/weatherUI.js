@@ -7,13 +7,14 @@ const icon = document.querySelector(".current-weather-icon");
 const hourlyCards = document.querySelector(".hourly-weather-cards");
 const weatherHistory = document.querySelector(".weather-history");
 const weatherHistoryCards = document.querySelector(".weather-history-cards");
+let unit = "C";
 
 export function displayWeatherToday(data) {
   const { currentConditions: current, hours } = data;
 
   location.textContent = "Current conditions in " + data.location;
-  currentTemp.textContent = "temp: " + current.temp;
-  feelsLike.textContent = "feels like: " + current.feelsLike;
+  renderTemp(currentTemp, current.temp);
+  renderTemp(feelsLike, current.feelsLike, "feels like");
   condition.textContent = "condition: " + current.conditions;
   icon.textContent = "icon: " + current.icon;
 
@@ -28,7 +29,7 @@ export function displayWeatherToday(data) {
     const hourIcon = document.createElement("div");
 
     time.textContent = "hour: " + hour.time;
-    temp.textContent = "temp: " + hour.temp;
+    renderTemp(temp, hour.temp);
     cond.textContent = "condition: " + hour.conditions;
     hourIcon.textContent = "icon: " + hour.icon;
 
@@ -51,8 +52,8 @@ export function displayWeatherHistory(data) {
     const condition = document.createElement("div");
     const icon = document.createElement("div");
 
-    datetime.textContent = "date: " + day.time; 
-    temp.textContent = "temp: " + day.temp;
+    datetime.textContent = "date: " + day.time;
+    renderTemp(temp, day.temp);
     condition.textContent = "condition: " + day.conditions;
     icon.textContent = "icon: " + day.icon;
 
@@ -60,4 +61,24 @@ export function displayWeatherHistory(data) {
     weatherHistoryCards.appendChild(card);
   });
   weatherHistory.hidden = false;
+}
+
+
+function formatTemp(celsius) {
+  const value = unit === "C"? celsius : celsius * 9 / 5 + 32;
+  return `${Math.round(value)}°${unit}`;
+}
+
+function renderTemp(el, celsius, label = "temp") {
+  el.classList.add("temp-value");
+  el.dataset.celsius = celsius;
+  el.dataset.label = label;
+  el.textContent = `${label}: ${formatTemp(celsius)}`;
+}
+
+export function toggleUnit() {
+  unit = unit === "C" ? "F" : "C";
+  document.querySelectorAll(".temp-value").forEach((el) => {
+    el.textContent = `${el.dataset.label}: ${formatTemp(Number(el.dataset.celsius))}`;
+  });
 }

@@ -4,6 +4,7 @@ import * as weatherUI from "./weatherUI.js";
 const weatherForm = document.querySelector("#weather-form");
 const locationInput = document.querySelector(".location");
 const locationError = document.querySelector(".location-error");
+const toggleUnit = document.querySelector(".toggle-unit");
 
 weatherForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -48,3 +49,5 @@ async function handleWeatherError(error) {
     locationError.textContent = `Something went wrong please try again later. ${error.message}`;
   }
 }
+
+toggleUnit.addEventListener("click", weatherUI.toggleUnit);
