@@ -1,3 +1,4 @@
+import {getIcon} from "./weatherIcons.js";
 const weatherToday = document.querySelector(".weather-today");
 const location = document.querySelector(".resolved-location");
 const currentTemp = document.querySelector(".current-temp");
@@ -16,7 +17,7 @@ export function displayWeatherToday(data) {
   renderTemp(currentTemp, current.temp);
   renderTemp(feelsLike, current.feelsLike, "feels like");
   condition.textContent = "condition: " + current.conditions;
-  icon.textContent = "icon: " + current.icon;
+  renderIcon(icon, current.icon);
 
   hourlyCards.innerHTML = "";
   hours.forEach((hour) => {
@@ -31,8 +32,7 @@ export function displayWeatherToday(data) {
     time.textContent = "hour: " + hour.time;
     renderTemp(temp, hour.temp);
     cond.textContent = "condition: " + hour.conditions;
-    hourIcon.textContent = "icon: " + hour.icon;
-
+    renderIcon(hourIcon, hour.icon);
     card.append(time, temp, cond, hourIcon);
     hourlyCards.appendChild(card);
   });
@@ -55,8 +55,7 @@ export function displayWeatherHistory(data) {
     datetime.textContent = "date: " + day.time;
     renderTemp(temp, day.temp);
     condition.textContent = "condition: " + day.conditions;
-    icon.textContent = "icon: " + day.icon;
-
+    renderIcon(icon, day.icon);
     card.append(datetime, temp, condition, icon);
     weatherHistoryCards.appendChild(card);
   });
@@ -81,4 +80,15 @@ export function toggleUnit() {
   document.querySelectorAll(".temp-value").forEach((el) => {
     el.textContent = `${el.dataset.label}: ${formatTemp(Number(el.dataset.celsius))}`;
   });
+}
+
+export async function renderIcon(div, name) {
+  const icon = await getIcon(name);
+  div.replaceChildren();
+  if(!icon) return;
+
+  const img = document.createElement("img");
+  img.src = icon;
+  img.alt = name;
+  div.appendChild(img);
 }

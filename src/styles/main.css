@@ -3,3 +3,14 @@
     flex-direction: column;
     min-height: 100vh;
 }
+
+.current-weather-icon img {
+  width: 5rem;
+  height: 5rem;
+}
+
+.hour-weather-card img,
+.day-weather-card img {
+  width: 3rem;
+  height: 3rem;
+}
