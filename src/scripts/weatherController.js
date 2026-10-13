@@ -44,7 +44,7 @@ async function loadHistory(location, days = 7) {
 
 async function handleWeatherError(error) {
   if (error.status === 400) {
-    locationError.textContent = "Could not find the country, try a city.";
+    locationError.textContent = "Could not find the location, try a nearby city.";
   } else {
     locationError.textContent = `Something went wrong please try again later. ${error.message}`;
   }
