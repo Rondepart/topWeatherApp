@@ -1,9 +1,96 @@
+input {
+  border: 1px solid #94a3b8;
+  padding: 2px 6px;
+  outline: none;
+}
+
+button {
+  border:  1px solid #94a3b8;
+  cursor: pointer;
+}
+
 .layout {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100dvh;
 }
 
+/* header section */
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  padding: 4px 6px;
+  background-color: rgb(119, 200, 210);
+  z-index: 10;
+}
+
+.header-start {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-end {
+  display: flex;
+  flex: 0 1 20rem;
+  min-width: 0;
+}
+
+#weather-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.search-field {
+  display: flex;
+  flex: 1 1 12rem;
+  min-width: 0;
+}
+
+.location:focus-within {
+  outline: 1.5px solid #1d4ed8;
+  outline-offset: -1.5px;
+}
+
+.search-field input {
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+}
+
+.search-field button {
+  border-left: none;
+  border-radius: 0px 20px 20px 0px;
+}
+
+.location {
+  border-radius: 20px 0px 0px 20px;
+}
+
+button[type="submit"] svg {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+}
+
+.location-error {
+  color: rgb(203, 55, 55);
+  font-weight: var(--fw-semibold);
+  flex-basis: 100%;
+}
+
+.location-error:empty {
+  display: none;
+}
+
+/* main section */
 .current-weather-icon img {
   width: 5rem;
   height: 5rem;
