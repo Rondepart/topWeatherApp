@@ -34,7 +34,7 @@ button {
   align-items: center;
 }
 
-.header-end {
+.header-center {
   display: flex;
   flex: 0 1 20rem;
   min-width: 0;
@@ -90,9 +90,18 @@ button[type="submit"] svg {
   display: none;
 }
 
+.header-end {
+  visibility: hidden;
+}
+
+.header-end.visible {
+  visibility: visible;
+}
+
 /* main section */
 .weather-container {
-  padding: 0px 4px;
+  padding: 0px 0.5rem;
+  padding-top: 0.5rem;
 }
 
 .hourly-weather-cards,

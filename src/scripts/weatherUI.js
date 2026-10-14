@@ -1,4 +1,5 @@
 import {getIcon} from "./weatherIcons.js";
+const headerEnd = document.querySelector(".header-end");
 const weatherToday = document.querySelector(".weather-today");
 const location = document.querySelector(".resolved-location");
 const currentTemp = document.querySelector(".current-temp");
@@ -37,6 +38,7 @@ export function displayWeatherToday(data) {
     hourlyCards.appendChild(card);
   });
   weatherToday.hidden = false;
+  headerEnd.classList.add("visible");
 }
 
 export function displayWeatherHistory(data) {
@@ -60,6 +62,7 @@ export function displayWeatherHistory(data) {
     weatherHistoryCards.appendChild(card);
   });
   weatherHistory.hidden = false;
+  headerEnd.classList.add("visible");
 }
 
 
