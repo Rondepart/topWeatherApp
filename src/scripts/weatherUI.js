@@ -1,5 +1,4 @@
 import {getIcon} from "./weatherIcons.js";
-const headerEnd = document.querySelector(".header-end");
 const weatherToday = document.querySelector(".weather-today");
 const location = document.querySelector(".resolved-location");
 const currentTemp = document.querySelector(".current-temp");
@@ -10,6 +9,8 @@ const hourlyCards = document.querySelector(".hourly-weather-cards");
 const weatherHistory = document.querySelector(".weather-history");
 const weatherHistoryCards = document.querySelector(".weather-history-cards");
 let unit = "C";
+const headerEnd = document.querySelector(".header-end");
+const toggleIndicator = document.querySelector(".toggle-indicator");
 
 export function displayWeatherToday(data) {
   const { currentConditions: current, hours } = data;
@@ -84,6 +85,7 @@ export function toggleUnit() {
   document.querySelectorAll(".temp-value").forEach((el) => {
     const elStr = el.dataset.label === "" ? `${formatTemp(Number(el.dataset.celsius))}` : `${el.dataset.label}: ${formatTemp(Number(el.dataset.celsius))}`
     el.textContent = elStr;
+    toggleIndicator.textContent = `Toggle Unit: °${unit}`;
   });
 }
 
