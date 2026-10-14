@@ -108,6 +108,10 @@ button {
   align-items: center;
 }
 
+.toggle-unit {
+  border-radius: 8px;
+}
+
 /* main section */
 .weather-container {
   padding: 0px 0.5rem;
