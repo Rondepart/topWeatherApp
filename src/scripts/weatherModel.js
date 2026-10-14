@@ -51,7 +51,7 @@ export function getWeatherHistory(data) {
 
   return {
     location: data.resolvedAddress,
-    days: data.days.map((day) => ({
+    days: data.days.toReversed().map((day) => ({
       time: day.datetime,
       temp: day.temp,
       conditions: day.conditions,
