@@ -2,7 +2,7 @@ import * as weatherModel from "./weatherModel.js";
 import * as weatherUI from "./weatherUI.js";
 
 const weatherForm = document.querySelector("#weather-form");
-const locationInput = document.querySelector(".location");
+const locationInput = document.querySelector(".location-field");
 const locationError = document.querySelector(".location-error");
 const toggleUnit = document.querySelector(".toggle-unit");
 

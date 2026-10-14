@@ -19,11 +19,10 @@ button {
 .header {
   display: flex;
   justify-content: space-between;
-  gap: 12px;
+  gap: 1rem;
   position: sticky;
   top: 0;
-  width: 100%;
-  padding: 4px 6px;
+  padding: 0.2rem 0.5rem;
   background-color: rgb(119, 200, 210);
   z-index: 10;
 }
@@ -43,38 +42,40 @@ button {
 #weather-form {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
   gap: 0.5rem;
   width: 100%;
 }
 
+.location-label {
+  font-size: var(--fs-base);
+}
+
 .search-field {
   display: flex;
   flex: 1 1 12rem;
-  min-width: 0;
 }
 
-.location:focus-within {
+.location-field:focus-within {
   outline: 1.5px solid #1d4ed8;
   outline-offset: -1.5px;
 }
 
-.search-field input {
+.location-field {
   flex: 1 1 auto;
   width: 100%;
-  min-width: 0;
+  min-width: 2.5rem;
+  border-radius: 20px 0px 0px 20px;
 }
 
-.search-field button {
+.search-btn {
+  flex: 0 0 auto;
   border-left: none;
   border-radius: 0px 20px 20px 0px;
 }
 
-.location {
-  border-radius: 20px 0px 0px 20px;
-}
-
-button[type="submit"] svg {
+.search-icon {
   width: 1rem;
   height: 1rem;
   fill: currentColor;
@@ -91,11 +92,20 @@ button[type="submit"] svg {
 }
 
 .header-end {
+  display: flex;
+  justify-content: center;
   visibility: hidden;
 }
 
 .header-end.visible {
   visibility: visible;
+}
+
+.toggle-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* main section */
@@ -107,7 +117,7 @@ button[type="submit"] svg {
 .hourly-weather-cards,
 .weather-history-cards {
   display: flex;
-  gap: 8px;
+  gap: 0.5rem;
   justify-content: space-around;
 }
 
@@ -134,7 +144,7 @@ button[type="submit"] svg {
 .current-condition-card {
   flex-direction: row;
   justify-content: center;
-  gap: clamp(1rem, 4vw, 2rem);
+  gap: clamp(0.5rem, 4vw, 2rem);
 }
 
 .hour-weather-card {
