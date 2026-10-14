@@ -5,14 +5,14 @@ input {
 }
 
 button {
-  border:  1px solid #94a3b8;
+  border: 1px solid #94a3b8;
   cursor: pointer;
 }
 
 .layout {
-    display: flex;
-    flex-direction: column;
-    min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
 }
 
 /* header section */

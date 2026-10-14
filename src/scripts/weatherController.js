@@ -18,16 +18,13 @@ weatherForm.addEventListener("submit", async (e) => {
 
   locationError.textContent = "";
 
-  await Promise.allSettled([
-    loadToday(location),
-    loadHistory(location),
-  ]);
+  await Promise.allSettled([loadToday(location), loadHistory(location)]);
 });
 
 async function loadToday(location) {
   try {
     const weatherData = await weatherModel.getWeatherData(location);
-    weatherUI.displayWeatherToday(weatherModel.getWeatherToday(weatherData)); 
+    weatherUI.displayWeatherToday(weatherModel.getWeatherToday(weatherData));
   } catch (error) {
     handleWeatherError(error);
   }
@@ -36,7 +33,9 @@ async function loadToday(location) {
 async function loadHistory(location, days = 7) {
   try {
     const weatherData = await weatherModel.getWeatherData(location, days);
-    weatherUI.displayWeatherHistory(weatherModel.getWeatherHistory(weatherData));
+    weatherUI.displayWeatherHistory(
+      weatherModel.getWeatherHistory(weatherData),
+    );
   } catch (error) {
     handleWeatherError(error);
   }
@@ -44,7 +43,8 @@ async function loadHistory(location, days = 7) {
 
 async function handleWeatherError(error) {
   if (error.status === 400) {
-    locationError.textContent = "Could not find the location, try a nearby city.";
+    locationError.textContent =
+      "Could not find the location, try a nearby city.";
   } else {
     locationError.textContent = `Something went wrong please try again later. ${error.message}`;
   }

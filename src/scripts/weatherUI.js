@@ -1,4 +1,4 @@
-import {getIcon} from "./weatherIcons.js";
+import { getIcon } from "./weatherIcons.js";
 const weatherToday = document.querySelector(".weather-today");
 const location = document.querySelector(".resolved-location");
 const currentTemp = document.querySelector(".current-temp");
@@ -43,7 +43,7 @@ export function displayWeatherToday(data) {
 }
 
 export function displayWeatherHistory(data) {
-  const {days} = data;
+  const { days } = data;
 
   weatherHistoryCards.innerHTML = "";
   days.forEach((day) => {
@@ -66,9 +66,8 @@ export function displayWeatherHistory(data) {
   headerEnd.classList.add("visible");
 }
 
-
 function formatTemp(celsius) {
-  const value = unit === "C"? celsius : celsius * 9 / 5 + 32;
+  const value = unit === "C" ? celsius : (celsius * 9) / 5 + 32;
   return `${Math.round(value)}°${unit}`;
 }
 
@@ -76,14 +75,20 @@ function renderTemp(el, celsius, label = "") {
   el.classList.add("temp-value");
   el.dataset.celsius = celsius;
   el.dataset.label = label;
-  const elStr = label === "" ? `${formatTemp(celsius)}` : `${label}: ${formatTemp(celsius)}`
+  const elStr =
+    label === ""
+      ? `${formatTemp(celsius)}`
+      : `${label}: ${formatTemp(celsius)}`;
   el.textContent = elStr;
 }
 
 export function toggleUnit() {
   unit = unit === "C" ? "F" : "C";
   document.querySelectorAll(".temp-value").forEach((el) => {
-    const elStr = el.dataset.label === "" ? `${formatTemp(Number(el.dataset.celsius))}` : `${el.dataset.label}: ${formatTemp(Number(el.dataset.celsius))}`
+    const elStr =
+      el.dataset.label === ""
+        ? `${formatTemp(Number(el.dataset.celsius))}`
+        : `${el.dataset.label}: ${formatTemp(Number(el.dataset.celsius))}`;
     el.textContent = elStr;
     toggleIndicator.textContent = `Toggle Unit: °${unit}`;
   });
@@ -92,7 +97,7 @@ export function toggleUnit() {
 export async function renderIcon(div, name) {
   const icon = await getIcon(name);
   div.replaceChildren();
-  if(!icon) return;
+  if (!icon) return;
 
   const img = document.createElement("img");
   img.src = icon;

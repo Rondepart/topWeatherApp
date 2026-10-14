@@ -55,7 +55,7 @@ export function getWeatherHistory(data) {
       time: day.datetime,
       temp: day.temp,
       conditions: day.conditions,
-      icon: day.icon,      
+      icon: day.icon,
     })),
   };
 }
