@@ -91,13 +91,70 @@ button[type="submit"] svg {
 }
 
 /* main section */
+.weather-container {
+  padding: 0px 4px;
+}
+
+.hourly-weather-cards,
+.weather-history-cards {
+  display: flex;
+  gap: 8px;
+  justify-content: space-around;
+}
+
+.weather-history-cards {
+  flex-direction: column;
+}
+
+.current-condition-card,
+.hour-weather-card,
+.day-weather-card {
+  display: flex;
+  border: 1px solid rgb(25, 25, 25);
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+
+.hour-weather-card,
+.day-weather-card {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.current-condition-card {
+  flex-direction: row;
+  justify-content: center;
+  gap: clamp(1rem, 4vw, 2rem);
+}
+
+.hour-weather-card {
+  flex: 0 0 8rem;
+}
+
+.current-condition-info {
+  min-width: 0;
+}
+
+.resolved-location {
+  overflow-wrap: anywhere;
+}
+
+.current-condition-icon {
+  flex: 0 0 auto;
+}
+
 .current-weather-icon img {
-  width: 5rem;
-  height: 5rem;
+  width: clamp(5rem, 15vw, 8rem);
+  height: auto;
 }
 
 .hour-weather-card img,
 .day-weather-card img {
   width: 3rem;
   height: 3rem;
+}
+
+.hourly-weather-cards {
+  overflow-x: auto;
 }
